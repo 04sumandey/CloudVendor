@@ -35,11 +35,7 @@ public class CloudVendorServiceImpl implements CloudVendorService {
 
     @Override
     public CloudVendor getCloudVendor(String cloudVendorId) {
-        if (cloudVendorRepository.findById(cloudVendorId).isPresent()){
-            return cloudVendorRepository.findById(cloudVendorId).get();
-        }else{
-            return null;
-        }
+        return cloudVendorRepository.findById(cloudVendorId).get();
     }
 
     @Override
