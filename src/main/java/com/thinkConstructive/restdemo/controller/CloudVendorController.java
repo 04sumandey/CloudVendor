@@ -22,7 +22,7 @@ public class CloudVendorController {
 
         return cloudVendorService.getCloudVendor(vendorId);
 //                new CloudVendor("C1","Vendor 1",
-//                "Address one","XXXXX");
+//                "Address one","XYZ");
     }
 
     //  Read All Cloud Vendor Details from DB
