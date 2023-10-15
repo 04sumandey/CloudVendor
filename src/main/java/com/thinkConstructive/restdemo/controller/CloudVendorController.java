@@ -1,7 +1,10 @@
 package com.thinkConstructive.restdemo.controller;
 
 import com.thinkConstructive.restdemo.model.CloudVendor;
+import com.thinkConstructive.restdemo.model.ErrorResponse;
 import com.thinkConstructive.restdemo.service.CloudVendorService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +21,15 @@ public class CloudVendorController {
 //  Read Specific Cloud Vendor Details from DB
 
     @GetMapping("{vendorId}")
-    public CloudVendor getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
+    public ResponseEntity<?> getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
 
-        return cloudVendorService.getCloudVendor(vendorId);
-//                new CloudVendor("C1","Vendor 1",
-//                "Address one","XXXXX");
+        CloudVendor cloudVendor =  cloudVendorService.getCloudVendor(vendorId);
+        if (cloudVendor!=null){
+            return ResponseEntity.ok(cloudVendor);
+        }else{
+            ErrorResponse errorResponse=new ErrorResponse("INVALID_ID", "Vendor Does not Exists");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
     }
 
     //  Read All Cloud Vendor Details from DB
